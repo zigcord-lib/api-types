@@ -3,29 +3,29 @@ const std = @import("std");
 const GatewayOpcode = @import("./opcode.zig").GatewayOpcode;
 const GatewaySendableEventPayload = @import("./sendable_event_payload.zig").GatewaySendableEventPayload;
 
-pub const GatewaySendableEvent = struct {
-    op: GatewayOpcode,
-    d: GatewaySendableEventPayload,
+const Self = @This();
 
-    pub fn init(comptime op: GatewayOpcode, d: GatewaySendableEventPayload) InitError!GatewaySendableEvent {
-        if (!op.isSendable()) {
-            return InitError.InvalidOpcode;
-        }
+op: GatewayOpcode,
+d: GatewaySendableEventPayload,
 
-        if (d.toGatewayOpcode() != op) {
-            return InitError.InvalidPayload;
-        }
-
-        return .{ .op = op, .d = d };
+pub fn init(comptime op: GatewayOpcode, d: GatewaySendableEventPayload) InitError!Self {
+    if (!op.isSendable()) {
+        return InitError.InvalidOpcode;
     }
 
-    pub const InitError = error{ InvalidOpcode, InvalidPayload };
-};
+    if (d.toGatewayOpcode() != op) {
+        return InitError.InvalidPayload;
+    }
+
+    return .{ .op = op, .d = d };
+}
+
+pub const InitError = error{ InvalidOpcode, InvalidPayload };
 
 const testing = std.testing;
 
 test "serialize to JSON" {
-    const event: GatewaySendableEvent = try .init(.heartbeat, .{ .heartbeat = 30 });
+    const event: Self = try .init(.heartbeat, .{ .heartbeat = 30 });
 
     const raw = try std.json.Stringify.valueAlloc(testing.allocator, event, .{});
     defer testing.allocator.free(raw);

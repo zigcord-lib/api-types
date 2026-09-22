@@ -1,3 +1,1 @@
-pub const GatewayHelloEventPayload = struct {
-    heartbeat_interval: u32,
-};
+heartbeat_interval: u32,
