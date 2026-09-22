@@ -7,7 +7,7 @@ pub fn build(b: *std.Build) void {
 
     const zigcord_utils_dep = b.dependency("zigcord_utils", .{});
 
-    const mod = b.addModule("api_types", .{
+    const mod = b.addModule("zigcord-api-types", .{
         .root_source_file = b.path("src/root.zig"),
         .target = target,
         .imports = &.{
