@@ -5,6 +5,7 @@ const Emoji = @import("../emoji/emoji.zig");
 const Sticker = @import("../sticker/sticker.zig");
 const Channel = @import("../channel/channel.zig");
 const User = @import("../user/user.zig");
+const Role = @import("../../role.zig");
 
 const Guild = @This();
 
@@ -22,23 +23,23 @@ afk_channel_id: ?Snowflake = null,
 afk_timeout: u32,
 widget_enabled: ?bool = null,
 widget_channel_id: ?Snowflake = null,
-// verification_level: TODO: support this
-// default_message_notifications: TODO: support this
-// explicit_content_filter: TODO: support this
-// roles: TODO: support this
+verification_level: VerificationLevel,
+default_message_notifications: DefaultMessageNotificationLevel,
+explicit_content_filter: ExplicitContentFilterLevel,
+roles: []const Role,
 emojis: []const Emoji,
-// features: TODO: support this
-// mfa_level: TODO: support this
+features: []const GuildFeature,
+mfa_level: MFALevel,
 application_id: ?Snowflake = null,
 system_channel_id: ?Snowflake = null,
-// system_channel_flags: TODO: support this
+system_channel_flags: u64,
 rules_channel_id: ?Snowflake = null,
 max_presences: ?u32 = null,
 max_members: ?u32 = null,
 vanity_url_code: ?[]const u8 = null,
 description: ?[]const u8 = null,
 banner: ?[]const u8 = null,
-// premium_tier: TODO: support this
+premium_tier: PremiumTier,
 premium_subscription_count: ?u32 = null,
 preferred_locale: []const u8,
 public_updates_channel_id: ?Snowflake = null,
@@ -46,12 +47,12 @@ max_video_channel_users: ?u32 = null,
 max_stage_video_channel_users: ?u32 = null,
 approximate_member_count: ?u32 = null,
 approximate_presence_count: ?u32 = null,
-// welcome_screen: TODO: support this
-// nsfw_level: TODO: support this
+welcome_screen: ?WelcomeScreen = null,
+nsfw_level: GuildAgeRestrictionLevel,
 stickers: ?[]const Sticker = null,
 premium_progress_bar_enabled: bool,
 safety_alerts_channel_id: ?Snowflake = null,
-// incidents_data: TODO: support this
+incidents_data: ?IncidentsData = null,
 
 pub const DefaultMessageNotificationLevel = enum(u8) {
     all_messages = 0,
@@ -155,7 +156,7 @@ pub const GuildPreview = struct {
     splash: ?[]const u8 = null,
     discovery_splash: ?[]const u8 = null,
     emojis: []const Emoji,
-    // features: TODO: support this
+    features: []const GuildFeature,
     approximate_member_count: u32,
     approximate_presence_count: u32,
     description: ?[]const u8 = null,
@@ -186,12 +187,12 @@ pub const GuildMember = struct {
     premium_since: ?[]const u8 = null,
     deaf: bool,
     mute: bool,
-    // flags: TODO: support this
+    flags: u64,
     pending: ?bool = null,
     permissions: ?[]const u8 = null,
     communication_disabled_until: ?[]const u8 = null,
-    // avatar_decoration_data: TODO: support this
-    // collectibles: TODO: support this
+    avatar_decoration_data: ?User.AvatarDecorationData = null,
+    collectibles: ?User.Collectible = null,
 };
 
 pub const GuildMemberFlag = enum(u8) {
@@ -215,14 +216,14 @@ pub const Integration = struct {
     syncing: ?bool = null,
     role_id: ?Snowflake = null,
     enable_emoticons: ?bool = null,
-    // expire_behavior: TODO: support this
+    expire_behavior: ?IntegrationExpireBehavior = null,
     expire_grace_period: ?u32 = null,
     user: ?User = null,
-    // account: TODO: support this
+    account: IntegrationAccount,
     synced_at: ?[]const u8 = null,
     subscriber_count: ?u32 = null,
     revoked: ?bool = null,
-    // application: TODO: support this
+    application: IntegrationApplication,
     // scopes: TODO: support this
 };
 
@@ -251,7 +252,7 @@ pub const Ban = struct {
 
 pub const WelcomeScreen = struct {
     description: ?[]const u8 = null,
-    // welcome_channels: TODO: support this
+    welcome_channels: []const WelcomeScreenChannel,
 };
 
 pub const WelcomeScreenChannel = struct {
@@ -263,16 +264,16 @@ pub const WelcomeScreenChannel = struct {
 
 pub const GuildOnboarding = struct {
     guild_id: Snowflake,
-    // prompts: TODO: support this
+    prompts: []const OnboardingPrompt,
     default_channel_ids: []const Snowflake,
     enabled: bool,
-    // mode: TODO: support this
+    mode: OnboardingMode,
 };
 
 pub const OnboardingPrompt = struct {
     id: Snowflake,
-    // type: TODO: support this
-    // options: TODO: support this
+    type: PromptType,
+    options: []const PromptOption,
     title: []const u8,
     single_select: bool,
     required: bool,

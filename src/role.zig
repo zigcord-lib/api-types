@@ -5,7 +5,7 @@ const Role = @This();
 id: Snowflake,
 name: []const u8,
 // color:u32 TODO: deprecated, review
-// colors: TODO: support this
+colors: RoleColors,
 hoist: bool,
 icon: ?[]const u8 = null,
 unicode_emoji: ?[]const u8 = null,
@@ -13,8 +13,8 @@ position: u32,
 permissions: []const u8,
 managed: bool,
 mentionable: bool,
-// tags: TODO: support this
-// flags: TODO: support this
+tags: ?RoleTags = null,
+flags: u8,
 
 pub const RoleTags = struct {
     bot_id: ?Snowflake = null,

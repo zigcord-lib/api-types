@@ -9,7 +9,7 @@ entitlement_ids: []const Snowflake,
 renewal_sku_ids: ?[]const Snowflake = null,
 current_period_start: []const u8 = null,
 current_period_end: []const u8 = null,
-// status: TODO: support this
+status: SubscriptionStatuses,
 canceled_at: ?[]const u8 = null,
 country: ?[]const u8 = null,
 

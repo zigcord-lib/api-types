@@ -1,20 +1,23 @@
+const PartialStruct = @import("zigcord-utils").PartialStruct;
+
 const Snowflake = @import("../../snowflake.zig").Snowflake;
+const Emoji = @import("../emoji/emoji.zig");
 
 const Poll = @This();
 
-// question: TODO: support this
-// answers: TODO: support this
+question: PollMedia,
+answers: []const PollAnswer,
 expiry: ?[]const u8 = null,
 allow_multiselect: bool,
-// layout_type: TODO: support this
-// results: TODO: support this
+layout_type: LayoutType,
+results: PollResults,
 
 pub const PollCreateRequest = struct {
-    // question: TODO: support this
-    // answers: TODO: support this
+    question: PollMedia,
+    answers: []const PollAnswer,
     duration: ?u32 = null,
     allow_multiselect: ?bool = null,
-    // layout_type: TODO: support this
+    layout_type: ?LayoutType = null,
 };
 
 pub const LayoutType = enum(u8) {
@@ -23,17 +26,17 @@ pub const LayoutType = enum(u8) {
 
 pub const PollMedia = struct {
     text: ?[]const u8 = null,
-    // emoji: TODO: support this
+    emoji: ?PartialStruct(Emoji) = null,
 };
 
 pub const PollAnswer = struct {
     answer_id: u32,
-    // poll_media: TODO: support this
+    poll_media: PollMedia,
 };
 
 pub const PollResults = struct {
     is_finalized: bool,
-    // answer_counts: TODO: support this
+    answer_counts: []const PollAnswerCount,
 };
 
 pub const PollAnswerCount = struct {

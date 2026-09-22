@@ -6,7 +6,7 @@ id: Snowflake,
 sku_id: Snowflake,
 application_id: Snowflake,
 user_id: ?Snowflake = null,
-// type: TODO: support this
+type: EntitlementType,
 deleted: bool,
 starts_at: ?[]const u8 = null,
 ends_at: ?[]const u8 = null,

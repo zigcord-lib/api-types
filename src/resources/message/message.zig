@@ -6,6 +6,7 @@ const Application = @import("../application/application.zig");
 const Channel = @import("../channel/channel.zig");
 const Sticker = @import("../sticker/sticker.zig");
 const Emoji = @import("../emoji/emoji.zig");
+const Poll = @import("../poll/poll.zig");
 
 const Message = @This();
 
@@ -17,35 +18,35 @@ timestamp: []const u8,
 edited_timestamp: ?[]const u8 = null,
 tts: bool,
 mention_everyone: bool,
-// mentions: TODO: support this
+mentions: []const User,
 mention_roles: []const Snowflake,
-// mention_channels: TODO: support this
-// attachments: TODO: support this
-// embeds: TODO: support this
-// reactions: TODO: support this
+mention_channels: ?[]const ChannelMention = null,
+attachments: []const Attachment,
+embeds: []const Embed,
+reactions: []const Reaction,
 // nonce: TODO: support this
 pinned: bool,
 webhook_id: ?Snowflake = null,
-// type: TODO: support this
-// activity: TODO: support this
+type: MessageType,
+activity: ?MessageActivity = null,
 application: ?PartialStruct(Application) = null,
 application_id: ?Snowflake = null,
-// flags: TODO: support this
-// message_reference: TODO: support this
-// message_snapshots: TODO: support this
-// referenced_message: TODO: support this
+flags: ?u64 = null,
+message_reference: ?MessageReference = null,
+message_snapshots: ?MessageSnapshot = null,
+referenced_message: ?Message = null,
 // interaction_metadata: TODO: support this
 // interaction: TODO: support this
 thread: ?Channel = null,
 // components: TODO: support this
-// sticker_items: TODO: support this
+sticker_items: ?[]const Sticker.StickerItem = null,
 stickers: ?[]const Sticker = null,
 position: ?u32 = null,
-// role_subscription_data: TODO: support this
+role_subscription_data: ?RoleSubscriptionData = null,
 // resolved: TODO: support this
-// poll: TODO: support this
-// call: TODO: support this
-// shared_client_theme: TODO: support this
+poll: ?Poll = null,
+call: ?MessageCall = null,
+shared_client_theme: ?SharedClientTheme = null,
 
 pub const MessageType = enum(u8) {
     default = 0,
@@ -88,7 +89,7 @@ pub const MessageType = enum(u8) {
 };
 
 pub const MessageActivity = struct {
-    // type: TODO: support this
+    type: MessageActivity,
     party_id: ?[]const u8 = null,
 };
 
@@ -150,7 +151,7 @@ pub const MessageCall = struct {
 };
 
 pub const MessageReference = struct {
-    // type: TODO: support this
+    type: ?MessageReferenceType = null,
     message_id: ?Snowflake = null,
     channel_id: ?Snowflake = null,
     guild_id: ?Snowflake = null,
@@ -168,7 +169,7 @@ pub const MessageSnapshot = struct {
 
 pub const Reaction = struct {
     count: u32,
-    // count_details: TODO: support this
+    count_details: ReactionCountDetails,
     me: bool,
     me_burst: bool,
     emoji: PartialStruct(Emoji),
@@ -182,19 +183,19 @@ pub const ReactionCountDetails = struct {
 
 pub const Embed = struct {
     title: ?[]const u8 = null,
-    // type: TODO: support this
+    type: ?EmbedType = null,
     description: ?[]const u8 = null,
     url: ?[]const u8 = null,
     timestamp: ?[]const u8 = null,
     color: ?u32 = null,
-    // footer: TODO: support this
-    // image: TODO: support this
-    // thumbnail: TODO: support this
-    // video: TODO: support this
-    // provider: TODO: support this
-    // author: TODO: support this
-    // fields: TODO: support this
-    // flags: TODO: support this
+    footer: ?EmbedFooter = null,
+    image: ?EmbedImage = null,
+    thumbnail: ?EmbedImage = null,
+    video: ?EmbedVideo = null,
+    provider: ?EmbedProvider = null,
+    author: ?EmbedAuthor = null,
+    fields: ?[]const EmbedField = null,
+    flags: ?u64 = null,
 };
 
 pub const EmbedType = enum {
@@ -220,7 +221,7 @@ pub const EmbedVideo = struct {
     placeholder: ?[]const u8 = null,
     placeholder_version: ?u32 = null,
     description: ?[]const u8 = null,
-    // flags: TODO: support this
+    flags: ?u64 = null,
 };
 
 pub const EmbedImage = struct {
@@ -232,7 +233,7 @@ pub const EmbedImage = struct {
     placeholder: ?[]const u8 = null,
     placeholder_version: ?u32 = null,
     description: ?[]const u8 = null,
-    // flags: TODO: support this
+    flags: ?u64 = null,
 };
 
 pub const EmbedMediaFlag = enum(u8) {
@@ -278,7 +279,7 @@ pub const Attachment = struct {
     ephemeral: ?bool = null,
     duration_secs: ?f64 = null,
     waveform: ?[]const u8 = null,
-    // flags: TODO: support this
+    flags: ?u64 = null,
     clip_participants: ?[]const User = null,
     clip_created_at: ?[]const u8 = null,
     application: ?Application = null,
@@ -305,18 +306,18 @@ pub const AttachmentFlag = enum(u8) {
 pub const ChannelMention = struct {
     id: Snowflake,
     guild_id: Snowflake,
-    // type: TODO: support this
+    type: Channel.ChannelType,
     name: []const u8,
 };
 
 pub const AllowedMentions = struct {
-    // parse: TODO: support this
+    parse: ?[]const AllowedMentionType = null,
     roles: ?[]const Snowflake = null,
     users: ?[]const Snowflake = null,
     replied_user: ?bool = null,
 };
 
-pub const AllowedMentionType = enum {
+pub const AllowedMentionType = enum { // TODO: implement json serialization and deserialization
     role_mentions,
     user_mentions,
     everyone_mentions,
@@ -338,11 +339,10 @@ pub const SharedClientTheme = struct {
     colors: []const []const u8,
     gradient_angle: u32,
     base_mix: u32,
-    // base_theme: TODO: support this
-
+    base_theme: ?BaseThemeType = null,
 };
 
-pub const BaseThemeTypes = enum(u8) {
+pub const BaseThemeType = enum(u8) {
     unset = 0,
     dark = 1,
     light = 2,

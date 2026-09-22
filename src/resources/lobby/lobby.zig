@@ -3,19 +3,20 @@ const std = @import("std");
 const Snowflake = @import("../../snowflake.zig").Snowflake;
 const Channel = @import("../channel/channel.zig");
 const User = @import("../user/user.zig");
+const Message = @import("../message/message.zig");
 
 const Lobby = @This();
 
 id: Snowflake,
 application_id: Snowflake,
 metadata: ?std.StringHashMapUnmanaged([]const u8) = null,
-// members: TODO: support this
+members: []const LobbyMember,
 linked_channel: ?Channel = null,
 
 pub const LobbyMember = struct {
     id: Snowflake,
     metadata: ?std.StringHashMapUnmanaged([]const u8) = null,
-    // flags: TODO: support this
+    flags: ?u64 = null,
     additional_name: ?[]const u8 = null,
 };
 
@@ -25,14 +26,14 @@ pub const LobbyMemberFlag = enum(u8) {
 
 pub const LobbyMessage = struct {
     id: Snowflake,
-    // type: TODO: support this
+    type: Message.MessageType,
     content: []const u8,
     lobby_id: Snowflake,
     channel_id: Snowflake,
     author: User,
-    // lobby_member: TODO: support this
+    lobby_member: ?LobbyMember = null,
     metadata: ?std.StringArrayHashMapUnmanaged([]const u8) = null,
     moderation_metadata: ?std.StringArrayHashMapUnmanaged([]const u8) = null,
-    // flags: TODO: support this
+    flags: u64,
     application_id: Snowflake,
 };

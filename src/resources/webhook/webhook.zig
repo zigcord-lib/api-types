@@ -8,7 +8,7 @@ const Channel = @import("../channel/channel.zig");
 const Webhook = @This();
 
 id: Snowflake,
-// type: TODO: support this
+type: WebhookType,
 guild_id: ?Snowflake = null,
 channel_id: ?Snowflake = null,
 user: ?User = null,

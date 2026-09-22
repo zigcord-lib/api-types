@@ -1,12 +1,14 @@
 const Snowflake = @import("../../snowflake.zig").Snowflake;
+const User = @import("../user/user.zig");
+const Guild = @import("../guild/guild.zig");
 
 const Channel = @This();
 
 id: Snowflake,
-// type: TODO: support  this
+type: ChannelType,
 guild_id: ?Snowflake = null,
 position: ?u32 = null,
-// permission_overwrites: TODO: support this
+permission_overwrites: []const Overwrite,
 name: ?[]const u8 = null,
 topic: ?[]const u8 = null,
 nsfw: ?bool = null,
@@ -14,7 +16,7 @@ last_message_id: ?Snowflake = null,
 bitrate: ?u32 = null,
 user_limit: ?u32 = null,
 rate_limit_per_user: ?u32 = null,
-// recipients: TODO: support this
+recipients: []const User,
 icon: ?[]const u8,
 owner_id: ?Snowflake = null,
 application_id: ?Snowflake = null,
@@ -22,22 +24,22 @@ managed: ?bool = null,
 parent_id: ?Snowflake = null,
 last_pin_timestamp: ?[]const u8 = null,
 rtc_region: ?[]const u8 = null,
-// video_quality_mode: TODO: support this
+video_quality_mode: ?VideoQualityMode = null,
 message_count: ?u32 = null,
 member_count: ?u32 = null,
-// thread_metadata: TODO: support this
-// member: TODO: support this
+thread_metadata: ?ThreadMetadata = null,
+member: ?ThreadMember = null,
 default_auto_archive_duration: ?u32 = null,
 permissions: ?[]const u8 = null,
 app_permissions: ?[]const u8 = null,
-flags: ?u64 = null, // TODO: create flag enum
+flags: ?u64 = null,
 total_message_sent: ?u32 = null,
-// available_tags: TODO: support this
+available_tags: ?[]const ForumTag = null,
 applied_tags: ?[]const Snowflake = null,
-// default_reaction_emoji: TODO: support this
+default_reaction_emoji: ?DefaultReaction = null,
 default_thread_rate_limit_per_user: ?u32 = null,
 default_sort_order: ?u32 = null,
-// default_forum_layout: TODO: support this
+default_forum_layout: ?ForumLayoutType = null,
 
 pub const ChannelType = enum(u8) {
     guild_text = 0,
@@ -104,8 +106,8 @@ pub const ThreadMember = struct {
     id: ?Snowflake = null,
     user_id: ?Snowflake = null,
     join_timestamp: []const u8,
-    flags: u64, // TODO: review
-    // member: TODO: support this
+    flags: u64,
+    member: ?Guild.GuildMember = null,
 };
 
 pub const DefaultReaction = struct {

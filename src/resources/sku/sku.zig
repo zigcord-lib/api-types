@@ -3,11 +3,11 @@ const Snowflake = @import("../../snowflake.zig");
 const SKU = @This();
 
 id: Snowflake,
-// type: TODO: support this
+type: SKUType,
 application_id: Snowflake,
 name: []const u8,
 slug: []const u8,
-// flags: TODO: support this
+flags: u64,
 
 pub const SKUType = enum(u8) {
     durable = 2,

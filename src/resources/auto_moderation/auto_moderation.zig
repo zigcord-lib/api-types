@@ -6,10 +6,10 @@ id: Snowflake,
 guild_id: Snowflake,
 name: []const u8,
 creator_id: Snowflake,
-// event_type: TODO: support this
-// trigger_type: TODO: support this
-// trigger_metadata: TODO: support this
-// actions: TODO: support this
+event_type: EventType,
+trigger_type: TriggerType,
+trigger_metadata: TriggerMetadata,
+actions: []const AutoModerationAction,
 enabled: bool,
 exempt_roles: []const Snowflake,
 exempt_channels: []const Snowflake,
@@ -25,7 +25,7 @@ pub const TriggerType = enum(u8) {
 pub const TriggerMetadata = struct {
     keyword_filter: []const []const u8,
     regex_patterns: []const []const u8,
-    // presets: TODO: support this
+    presets: []const KeywordPresetType,
     allow_list: []const []const u8,
     mention_total_limit: u32,
     mention_raid_protection_enabled: bool,
@@ -43,8 +43,8 @@ pub const EventType = enum(u8) {
 };
 
 pub const AutoModerationAction = struct {
-    // type: TODO: support this
-    // metadata: TODO: support this
+    type: ActionType,
+    metadata: ?ActionMetadata = null,
 };
 
 pub const ActionType = enum(u8) {

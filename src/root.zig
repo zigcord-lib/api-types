@@ -6,6 +6,7 @@ pub const resources = @import("./resources/resources.zig");
 pub const Snowflake = @import("./snowflake.zig").Snowflake;
 pub const Permission = @import("./permission.zig").Permission;
 pub const Role = @import("./role.zig");
+pub const Team = @import("./team.zig");
 
 test {
     std.testing.refAllDecls(@This());

@@ -8,8 +8,8 @@ pack_id: ?Snowflake = null,
 name: []const u8 = null,
 description: ?[]const u8 = null,
 tags: []const u8,
-// type: TODO: support this
-// format_type: TODO: support this
+type: StickerType,
+format_type: StickerFormatType,
 available: ?bool = null,
 guild_id: ?Snowflake = null,
 user: ?User = null,
@@ -30,7 +30,7 @@ pub const StickerFormatType = enum(u8) {
 pub const StickerItem = struct {
     id: Snowflake,
     name: []const u8,
-    // format_type: TODO: support this
+    format_type: StickerFormatType,
 };
 
 pub const StickerPack = struct {

@@ -3,6 +3,7 @@ const PartialStruct = @import("zigcord-utils").PartialStruct;
 const Snowflake = @import("../../snowflake.zig").Snowflake;
 const User = @import("../user/user.zig");
 const Guild = @import("../guild/guild.zig");
+const Team = @import("../../team.zig");
 
 const Application = @This();
 
@@ -18,7 +19,7 @@ terms_of_service_url: ?[]const u8 = null,
 privacy_policy_url: ?[]const u8 = null,
 owner: ?PartialStruct(User) = null,
 verify_key: []const u8,
-// team: TODO: support this
+team: ?Team = null,
 guild_id: ?Snowflake = null,
 guild: ?PartialStruct(Guild) = null,
 primary_sku_id: ?Snowflake = null,
@@ -33,10 +34,10 @@ redirect_uris: ?[]const []const u8 = null,
 interactions_endpoint_url: ?[]const u8 = null,
 role_connections_verification_url: ?[]const u8 = null,
 event_webhooks_url: ?[]const u8 = null,
-// event_webhooks_status: TODO: support this
+event_webhooks_status: ?ApplicationEventWebhookStatus = null,
 event_webhooks_types: ?[]const []const u8 = null,
 tags: ?[]const []const u8 = null,
-// install_params: TODO: support this
+install_params: ?InstallParams = null,
 // integration_types_config: TODO: support this
 custom_install_url: ?[]const u8 = null,
 
@@ -46,7 +47,7 @@ pub const ApplicationIntegrationType = enum(u8) {
 };
 
 pub const ApplicationIntegrationTypeConfiguration = struct {
-    // oauth2_install_params: TODO: support this
+    oauth2_install_params: ?InstallParams = null,
 };
 
 pub const ApplicationEventWebhookStatus = enum(u8) {
@@ -70,7 +71,7 @@ pub const ApplicationFlag = enum(u8) {
 
 pub const InstallParams = struct {
     scopes: []const []const u8, // TODO: create scope enum
-    permissions: []const u8, // TODO: create permission flag
+    permissions: []const u8,
 };
 
 pub const ActivityInstance = struct {

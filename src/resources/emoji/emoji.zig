@@ -5,7 +5,7 @@ const Emoji = @This();
 
 id: ?Snowflake = null,
 name: ?[]const u8 = null,
-// roles: TODO: support this
+roles: ?[]const Snowflake = null,
 user: ?User = null,
 require_colons: ?bool = null,
 managed: ?bool = null,

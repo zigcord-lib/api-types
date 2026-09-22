@@ -1,4 +1,8 @@
+const PartialStruct = @import("zigcord-utils").PartialStruct;
+
 const Snowflake = @import("../../snowflake.zig").Snowflake;
+const Guild = @import("../guild/guild.zig");
+const ApplicationRoleConnectionMetadata = @import("../application_role_connection_metadata/application_role_connection_metadata.zig");
 
 const User = @This();
 
@@ -59,7 +63,7 @@ pub const AvatarDecorationData = struct {
 };
 
 pub const Collectible = struct {
-    // nameplate: TODO: support this
+    nameplate: ?Nameplate = null,
 };
 
 pub const Nameplate = struct {
@@ -74,7 +78,7 @@ pub const Connection = struct {
     name: []const u8,
     type: []const u8,
     revoked: ?bool = null,
-    // integrations: TODO: support this
+    integrations: ?[]const PartialStruct(Guild.Integration) = null, // TODO: review
     verified: bool,
     friend_sync: bool,
     show_activity: bool,
@@ -89,5 +93,5 @@ pub const Connection = struct {
 
 pub const ApplicationRoleConnection = struct {
     platform_name: ?[]const u8 = null,
-    // metadata: TODO: support this
+    metadata: ApplicationRoleConnectionMetadata, // TODO: review
 };

@@ -12,15 +12,15 @@ name: []const u8,
 description: ?[]const u8 = null,
 scheduled_start_time: []const u8,
 scheduled_end_time: ?[]const u8 = null,
-// privacy_level: TODO: support this
-// status: TODO: support this
-// entity_type: TODO: support this
+privacy_level: GuildScheduledEventPrivacyLevel,
+status: GuildScheduledEventStatus,
+entity_type: GuildScheduledEventEntityType,
 entity_id: ?Snowflake = null,
-// entity_metadata: TODO: support this
+entity_metadata: ?GuildScheduledEventEntityMetadata = null,
 creator: ?User = null,
 user_count: ?u32 = null,
 image: ?[]const u8 = null,
-// recurrence_rule: TODO: support this
+recurrence_rule: ?GuildScheduledEventRecurrenceRule = null,
 
 pub const GuildScheduledEventPrivacyLevel = enum(u8) {
     guild_only = 2,

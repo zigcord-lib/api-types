@@ -5,23 +5,24 @@ const Channel = @import("../channel/channel.zig");
 const User = @import("../user/user.zig");
 const Application = @import("../application/application.zig");
 const GuildScheduledEvent = @import("../guild_scheduled_event/guild_scheduled_event.zig");
+const Role = @import("../../role.zig");
 
 const Invite = @This();
 
-// type: TODO: support this
+type: u8,
 code: []const u8,
 guild: ?PartialStruct(Guild) = null,
 channel: ?PartialStruct(Channel) = null,
 inviter: ?User = null,
-// target_type: TODO: support this
+target_type: ?u8 = null,
 target_user: ?User = null,
 target_application: ?PartialStruct(Application) = null,
 approximate_presence_count: ?u32 = null,
 approximate_member_count: ?u32 = null,
 expires_at: ?[]const u8 = null,
 guild_scheduled_event: ?GuildScheduledEvent = null,
-// flags: TODO: support this
-// roles: TODO: support this
+flags: ?u8 = null,
+roles: ?PartialStruct(Role) = null,
 
 pub const InviteType = enum(u8) {
     guild = 0,
