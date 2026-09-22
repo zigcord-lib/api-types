@@ -1,13 +1,6 @@
 const Snowflake = @import("../../snowflake.zig").Snowflake;
 
-pub const ApplicationRoleConnection = @import("./application_role_connection.zig");
-pub const AvatarDecorationData = @import("./avatar_decoration_data.zig");
-pub const Collectible = @import("./collectible.zig");
-pub const Connection = @import("./connection.zig");
-pub const Nameplate = @import("./nameplate.zig");
-pub const PremiumType = @import("./premium_type.zig");
-pub const PrimaryGuild = @import("./primary_guild.zig");
-pub const UserFlag = @import("./user_flag.zig");
+const User = @This();
 
 id: Snowflake,
 username: []const u8,
@@ -28,3 +21,73 @@ public_flags: ?u64 = null,
 avatar_decoration_data: ?AvatarDecorationData = null,
 collectibles: ?Collectible = null,
 primary_guild: ?PrimaryGuild = null,
+
+pub const UserFlag = enum(u32) {
+    STAFF = 1 << 0,
+    PARTNER = 1 << 1,
+    HYPESQUAD = 1 << 2,
+    BUG_HUNTER_LEVEL_1 = 1 << 3,
+    HYPESQUAD_ONLINE_HOUSE_1 = 1 << 6,
+    HYPESQUAD_ONLINE_HOUSE_2 = 1 << 7,
+    HYPESQUAD_ONLINE_HOUSE_3 = 1 << 8,
+    PREMIUM_EARLY_SUPPORTER = 1 << 9,
+    TEAM_PSEUDO_USER = 1 << 10,
+    BUG_HUNTER_LEVEL_2 = 1 << 14,
+    VERIFIED_BOT = 1 << 16,
+    VERIFIED_DEVELOPER = 1 << 17,
+    CERTIFIED_MODERATOR = 1 << 18,
+    BOT_HTTP_INTERACTIONS = 1 << 19,
+};
+
+pub const PremiumType = enum(u8) {
+    none = 0,
+    nitro_classic = 1,
+    nitro = 2,
+    nitro_basic = 3,
+};
+
+pub const PrimaryGuild = struct {
+    identity_guild_id: ?Snowflake = null,
+    identity_enabled: ?bool = null,
+    tag: ?[]const u8,
+    badge: ?[]const u8,
+};
+
+pub const AvatarDecorationData = struct {
+    asset: []const u8,
+    sku_id: Snowflake,
+};
+
+pub const Collectible = struct {
+    // nameplate: TODO: support this
+};
+
+pub const Nameplate = struct {
+    sku_id: Snowflake,
+    asset: []const u8,
+    label: []const u8,
+    palette: []const u8, // TODO: create palette enum
+};
+
+pub const Connection = struct {
+    id: []const u8,
+    name: []const u8,
+    type: []const u8,
+    revoked: ?bool = null,
+    // integrations: TODO: support this
+    verified: bool,
+    friend_sync: bool,
+    show_activity: bool,
+    two_way_link: bool,
+    visibility: u8,
+
+    pub const Visibility = enum(u8) {
+        none = 0,
+        everyone = 1,
+    };
+};
+
+pub const ApplicationRoleConnection = struct {
+    platform_name: ?[]const u8 = null,
+    // metadata: TODO: support this
+};

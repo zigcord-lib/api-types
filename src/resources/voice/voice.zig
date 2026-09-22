@@ -1,9 +1,12 @@
 const Snowflake = @import("../../snowflake.zig").Snowflake;
+const Guild = @import("../guild/guild.zig");
+
+const Voice = @This();
 
 guild_id: ?Snowflake = null,
 channel_id: ?Snowflake = null,
 user_id: Snowflake,
-// member: TODO: support this
+member: ?Guild.GuildMember = null,
 session_id: []const u8,
 deaf: bool,
 mute: bool,

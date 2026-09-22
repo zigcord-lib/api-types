@@ -1,4 +1,10 @@
+const PartialStruct = @import("zigcord-utils").PartialStruct;
+
 const Snowflake = @import("../../snowflake.zig").Snowflake;
+const User = @import("../user/user.zig");
+const Guild = @import("../guild/guild.zig");
+
+const Application = @This();
 
 id: Snowflake,
 name: []const u8,
@@ -7,14 +13,14 @@ description: []const u8,
 rpc_origins: ?[]const []const u8 = null,
 bot_public: bool,
 bot_require_code_grant: bool,
-// bot: TODO: support this
+bot: ?PartialStruct(User) = null,
 terms_of_service_url: ?[]const u8 = null,
 privacy_policy_url: ?[]const u8 = null,
-// owner: TODO: support this
+owner: ?PartialStruct(User) = null,
 verify_key: []const u8,
 // team: TODO: support this
 guild_id: ?Snowflake = null,
-// guild: TODO: support this
+guild: ?PartialStruct(Guild) = null,
 primary_sku_id: ?Snowflake = null,
 slug: ?[]const u8 = null,
 cover_image: ?[]const u8 = null,

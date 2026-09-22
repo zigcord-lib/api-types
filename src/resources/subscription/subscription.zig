@@ -1,5 +1,7 @@
 const Snowflake = @import("../../snowflake.zig").Snowflake;
 
+const Subscription = @This();
+
 id: Snowflake,
 user_id: Snowflake,
 sku_ids: []const Snowflake,

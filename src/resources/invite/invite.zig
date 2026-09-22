@@ -1,19 +1,27 @@
-pub const Invite = struct {
-    // type: TODO: support this
-    code: []const u8,
-    // guild: TODO: support this
-    // channel: TODO: support this
-    // inviter: TODO: support this
-    // target_type: TODO: support this
-    // target_user: TODO: support this
-    // target_application: TODO: support this
-    approximate_presence_count: ?u32 = null,
-    approximate_member_count: ?u32 = null,
-    expires_at: ?[]const u8 = null,
-    // guild_scheduled_event: TODO: support this
-    // flags: TODO: support this
-    // roles: TODO: support this
-};
+const PartialStruct = @import("zigcord-utils").PartialStruct;
+
+const Guild = @import("../guild/guild.zig");
+const Channel = @import("../channel/channel.zig");
+const User = @import("../user/user.zig");
+const Application = @import("../application/application.zig");
+const GuildScheduledEvent = @import("../guild_scheduled_event/guild_scheduled_event.zig");
+
+const Invite = @This();
+
+// type: TODO: support this
+code: []const u8,
+guild: ?PartialStruct(Guild) = null,
+channel: ?PartialStruct(Channel) = null,
+inviter: ?User = null,
+// target_type: TODO: support this
+target_user: ?User = null,
+target_application: ?PartialStruct(Application) = null,
+approximate_presence_count: ?u32 = null,
+approximate_member_count: ?u32 = null,
+expires_at: ?[]const u8 = null,
+guild_scheduled_event: ?GuildScheduledEvent = null,
+// flags: TODO: support this
+// roles: TODO: support this
 
 pub const InviteType = enum(u8) {
     guild = 0,
@@ -39,7 +47,7 @@ pub const InviteMetadata = struct {
 };
 
 pub const InviteStageInstance = struct {
-    // members: TODO: support this
+    members: []const PartialStruct(Guild.GuildMember),
     participant_count: u32,
     speaker_count: u32,
     topic: []const u8,

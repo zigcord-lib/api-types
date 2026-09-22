@@ -1,24 +1,26 @@
 const Snowflake = @import("../../snowflake.zig").Snowflake;
+const User = @import("../user/user.zig");
+const Guild = @import("../guild/guild.zig");
 
-pub const GuildScheduledEvent = struct {
-    id: Snowflake,
-    guild_id: Snowflake,
-    channel_id: ?Snowflake = null,
-    creator_id: ?Snowflake = null,
-    name: []const u8,
-    description: ?[]const u8 = null,
-    scheduled_start_time: []const u8,
-    scheduled_end_time: ?[]const u8 = null,
-    // privacy_level: TODO: support this
-    // status: TODO: support this
-    // entity_type: TODO: support this
-    entity_id: ?Snowflake = null,
-    // entity_metadata: TODO: support this
-    // creator: TODO: support this
-    user_count: ?u32 = null,
-    image: ?[]const u8 = null,
-    // recurrence_rule: TODO: support this
-};
+const GuildScheduledEvent = @This();
+
+id: Snowflake,
+guild_id: Snowflake,
+channel_id: ?Snowflake = null,
+creator_id: ?Snowflake = null,
+name: []const u8,
+description: ?[]const u8 = null,
+scheduled_start_time: []const u8,
+scheduled_end_time: ?[]const u8 = null,
+// privacy_level: TODO: support this
+// status: TODO: support this
+// entity_type: TODO: support this
+entity_id: ?Snowflake = null,
+// entity_metadata: TODO: support this
+creator: ?User = null,
+user_count: ?u32 = null,
+image: ?[]const u8 = null,
+// recurrence_rule: TODO: support this
 
 pub const GuildScheduledEventPrivacyLevel = enum(u8) {
     guild_only = 2,
@@ -43,8 +45,8 @@ pub const GuildScheduledEventEntityMetadata = struct {
 
 pub const GuildScheduledEventUser = struct {
     guild_scheduled_event_id: Snowflake,
-    // user: TODO: support this
-    // member: TODO: support this
+    user: User,
+    member: ?Guild.GuildMember = null,
 };
 
 pub const GuildScheduledEventRecurrenceRule = struct {

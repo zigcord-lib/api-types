@@ -1,12 +1,16 @@
 const std = @import("std");
 
 const Snowflake = @import("../../snowflake.zig").Snowflake;
+const Channel = @import("../channel/channel.zig");
+const User = @import("../user/user.zig");
+
+const Lobby = @This();
 
 id: Snowflake,
 application_id: Snowflake,
 metadata: ?std.StringHashMapUnmanaged([]const u8) = null,
 // members: TODO: support this
-// linked_channel: TODO: support this
+linked_channel: ?Channel = null,
 
 pub const LobbyMember = struct {
     id: Snowflake,
@@ -25,7 +29,7 @@ pub const LobbyMessage = struct {
     content: []const u8,
     lobby_id: Snowflake,
     channel_id: Snowflake,
-    // author: TODO: support this
+    author: User,
     // lobby_member: TODO: support this
     metadata: ?std.StringArrayHashMapUnmanaged([]const u8) = null,
     moderation_metadata: ?std.StringArrayHashMapUnmanaged([]const u8) = null,

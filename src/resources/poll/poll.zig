@@ -1,5 +1,7 @@
 const Snowflake = @import("../../snowflake.zig").Snowflake;
 
+const Poll = @This();
+
 // question: TODO: support this
 // answers: TODO: support this
 expiry: ?[]const u8 = null,

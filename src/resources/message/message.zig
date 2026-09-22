@@ -1,8 +1,17 @@
+const PartialStruct = @import("zigcord-utils").PartialStruct;
+
 const Snowflake = @import("../../snowflake.zig").Snowflake;
+const User = @import("../user/user.zig");
+const Application = @import("../application/application.zig");
+const Channel = @import("../channel/channel.zig");
+const Sticker = @import("../sticker/sticker.zig");
+const Emoji = @import("../emoji/emoji.zig");
+
+const Message = @This();
 
 id: Snowflake,
 channel_id: Snowflake,
-// author: TODO: support this
+author: User,
 content: []const u8,
 timestamp: []const u8,
 edited_timestamp: ?[]const u8 = null,
@@ -19,7 +28,7 @@ pinned: bool,
 webhook_id: ?Snowflake = null,
 // type: TODO: support this
 // activity: TODO: support this
-// application: TODO: support this
+application: ?PartialStruct(Application) = null,
 application_id: ?Snowflake = null,
 // flags: TODO: support this
 // message_reference: TODO: support this
@@ -27,10 +36,10 @@ application_id: ?Snowflake = null,
 // referenced_message: TODO: support this
 // interaction_metadata: TODO: support this
 // interaction: TODO: support this
-// thread: TODO: support this
+thread: ?Channel = null,
 // components: TODO: support this
 // sticker_items: TODO: support this
-// stickers: TODO: support this
+stickers: ?[]const Sticker = null,
 position: ?u32 = null,
 // role_subscription_data: TODO: support this
 // resolved: TODO: support this
@@ -110,17 +119,17 @@ pub const MessageFlag = enum(u8) {
 pub const ApplicationCommandInteractionMetadata = struct {
     id: Snowflake,
     // type: TODO: support this
-    // user: TODO: support this
+    user: User,
     // authorizing_integration_owners: TODO: support this
     original_response_message_id: ?Snowflake = null,
-    // target_user: TODO: support this
+    target_user: ?User = null,
     target_message_id: ?Snowflake = null,
 };
 
 pub const MessageComponentInteractionMetadata = struct {
     id: Snowflake,
     // type: TODO: support this
-    // user: TODO: support this
+    user: User,
     // authorizing_integration_owners: TODO: support this
     original_response_message_id: ?Snowflake = null,
     interacted_message_id: Snowflake,
@@ -129,7 +138,7 @@ pub const MessageComponentInteractionMetadata = struct {
 pub const ModalSubmitInteractionMetadata = struct {
     id: Snowflake,
     // type: TODO: support this
-    // user: TODO: support this
+    user: User,
     // authorizing_integration_owners: TODO: support this
     original_response_message_id: ?Snowflake = null,
     // triggering_interaction_metadata: TODO: support this
@@ -154,7 +163,7 @@ pub const MessageReferenceType = enum(u8) {
 };
 
 pub const MessageSnapshot = struct {
-    // message: TODO: support this
+    message: PartialStruct(Message),
 };
 
 pub const Reaction = struct {
@@ -162,7 +171,7 @@ pub const Reaction = struct {
     // count_details: TODO: support this
     me: bool,
     me_burst: bool,
-    // emoji: TODO: support this
+    emoji: PartialStruct(Emoji),
     // burst_colors: TODO: support this
 };
 
@@ -270,9 +279,9 @@ pub const Attachment = struct {
     duration_secs: ?f64 = null,
     waveform: ?[]const u8 = null,
     // flags: TODO: support this
-    // clip_participants: TODO: support this
+    clip_participants: ?[]const User = null,
     clip_created_at: ?[]const u8 = null,
-    // application: TODO: support this
+    application: ?Application = null,
 };
 
 pub const AttachmentRequest = struct {
@@ -322,7 +331,7 @@ pub const RoleSubscriptionData = struct {
 
 pub const MessagePin = struct {
     pinned_at: []const u8,
-    // message: TODO: support this
+    message: Message,
 };
 
 pub const SharedClientTheme = struct {

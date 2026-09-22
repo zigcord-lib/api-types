@@ -1,3 +1,5 @@
+const ApplicationIdentityProfile = @This();
+
 username: ?[]const u8 = null,
 // metadata: TODO: support this
 data: ?ProfileData = null,

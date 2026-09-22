@@ -1,5 +1,7 @@
 const Snowflake = @import("../../snowflake.zig").Snowflake;
 
+const AutoModeration = @This();
+
 id: Snowflake,
 guild_id: Snowflake,
 name: []const u8,

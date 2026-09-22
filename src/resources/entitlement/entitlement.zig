@@ -1,5 +1,7 @@
 const Snowflake = @import("../../snowflake.zig").Snowflake;
 
+const Entitlement = @This();
+
 id: Snowflake,
 sku_id: Snowflake,
 application_id: Snowflake,

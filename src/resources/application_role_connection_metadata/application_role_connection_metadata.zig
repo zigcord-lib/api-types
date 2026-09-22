@@ -1,3 +1,5 @@
+const ApplicationRoleConnectionMetadata = @This();
+
 type: ApplicationRoleConnectionMetadataType,
 key: []const u8,
 name: []const u8,

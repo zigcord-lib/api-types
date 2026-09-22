@@ -1,5 +1,7 @@
 const Snowflake = @import("../../snowflake.zig");
 
+const StageInstance = @This();
+
 id: Snowflake,
 guild_id: Snowflake,
 channel_id: Snowflake,

@@ -1,5 +1,7 @@
 const Snowflake = @import("../../snowflake.zig");
 
+const SKU = @This();
+
 id: Snowflake,
 // type: TODO: support this
 application_id: Snowflake,

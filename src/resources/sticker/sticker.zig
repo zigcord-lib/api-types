@@ -1,4 +1,7 @@
 const Snowflake = @import("../../snowflake.zig");
+const User = @import("../user/user.zig");
+
+const Sticker = @This();
 
 id: Snowflake,
 pack_id: ?Snowflake = null,
@@ -9,7 +12,7 @@ tags: []const u8,
 // format_type: TODO: support this
 available: ?bool = null,
 guild_id: ?Snowflake = null,
-// user: TODO: support this
+user: ?User = null,
 sort_value: ?u32 = null,
 
 pub const StickerType = enum(u8) {
@@ -32,7 +35,7 @@ pub const StickerItem = struct {
 
 pub const StickerPack = struct {
     id: Snowflake,
-    // stickers: TODO: support this
+    stickers: []const Sticker,
     name: []const u8,
     sku_id: Snowflake,
     cover_sticker_id: ?Snowflake = null,

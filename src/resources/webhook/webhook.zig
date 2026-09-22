@@ -1,16 +1,23 @@
+const PartialStruct = @import("zigcord-utils").PartialStruct;
+
 const Snowflake = @import("../../snowflake.zig").Snowflake;
+const User = @import("../user/user.zig");
+const Guild = @import("../guild/guild.zig");
+const Channel = @import("../channel/channel.zig");
+
+const Webhook = @This();
 
 id: Snowflake,
 // type: TODO: support this
 guild_id: ?Snowflake = null,
 channel_id: ?Snowflake = null,
-// user: TODO: support this
+user: ?User = null,
 name: ?[]const u8 = null,
 avatar: ?[]const u8 = null,
 token: ?[]const u8 = null,
 application_id: ?Snowflake = null,
-// source_guild: TODO: support this
-// source_channel: TODO: support this
+source_guild: ?PartialStruct(Guild) = null,
+source_channel: ?PartialStruct(Channel) = null,
 url: ?[]const u8 = null,
 
 pub const WebhookType = enum(u8) {

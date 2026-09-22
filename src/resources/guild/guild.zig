@@ -1,5 +1,12 @@
+const PartialStruct = @import("zigcord-utils").PartialStruct;
+
 const Snowflake = @import("../../snowflake.zig").Snowflake;
 const Emoji = @import("../emoji/emoji.zig");
+const Sticker = @import("../sticker/sticker.zig");
+const Channel = @import("../channel/channel.zig");
+const User = @import("../user/user.zig");
+
+const Guild = @This();
 
 id: Snowflake,
 name: []const u8,
@@ -41,7 +48,7 @@ approximate_member_count: ?u32 = null,
 approximate_presence_count: ?u32 = null,
 // welcome_screen: TODO: support this
 // nsfw_level: TODO: support this
-// stickers: TODO: support this
+stickers: ?[]const Sticker = null,
 premium_progress_bar_enabled: bool,
 safety_alerts_channel_id: ?Snowflake = null,
 // incidents_data: TODO: support this
@@ -152,7 +159,7 @@ pub const GuildPreview = struct {
     approximate_member_count: u32,
     approximate_presence_count: u32,
     description: ?[]const u8 = null,
-    // stickers: TODO: support this
+    stickers: []const Sticker,
 };
 
 pub const GuildWidgetSettings = struct {
@@ -164,13 +171,13 @@ pub const GuildWidget = struct {
     id: Snowflake,
     name: []const u8,
     instant_invite: ?[]const u8 = null,
-    // channels: TODO: support this
-    // members: TODO: support this
+    channels: []const PartialStruct(Channel),
+    members: []const PartialStruct(User),
     presence_count: u32,
 };
 
 pub const GuildMember = struct {
-    // user: TODO: support this
+    user: ?User = null,
     nick: ?[]const u8 = null,
     avatar: ?[]const u8 = null,
     banner: ?[]const u8 = null,
@@ -210,7 +217,7 @@ pub const Integration = struct {
     enable_emoticons: ?bool = null,
     // expire_behavior: TODO: support this
     expire_grace_period: ?u32 = null,
-    // user: TODO: support this
+    user: ?User = null,
     // account: TODO: support this
     synced_at: ?[]const u8 = null,
     subscriber_count: ?u32 = null,
@@ -234,12 +241,12 @@ pub const IntegrationApplication = struct {
     name: []const u8,
     icon: ?[]const u8 = null,
     description: []const u8,
-    // bot: TODO: support this
+    bot: ?User = null,
 };
 
 pub const Ban = struct {
     reason: ?[]const u8 = null,
-    // user: TODO: support this
+    user: User,
 };
 
 pub const WelcomeScreen = struct {

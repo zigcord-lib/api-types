@@ -1,5 +1,7 @@
 const Snowflake = @import("../../snowflake.zig").Snowflake;
 
+const Channel = @This();
+
 id: Snowflake,
 // type: TODO: support  this
 guild_id: ?Snowflake = null,
