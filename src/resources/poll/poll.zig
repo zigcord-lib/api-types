@@ -1,6 +1,6 @@
 const PartialStruct = @import("zigcord-utils").PartialStruct;
 
-const Snowflake = @import("../../snowflake.zig").Snowflake;
+const Snowflake = @import("../../snowflake/snowflake.zig").Snowflake;
 const Emoji = @import("../emoji/emoji.zig");
 
 const Poll = @This();

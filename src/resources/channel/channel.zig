@@ -1,4 +1,4 @@
-const Snowflake = @import("../../snowflake.zig").Snowflake;
+const Snowflake = @import("../../snowflake/snowflake.zig").Snowflake;
 const User = @import("../user/user.zig");
 const Guild = @import("../guild/guild.zig");
 

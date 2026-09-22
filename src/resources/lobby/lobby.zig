@@ -1,6 +1,6 @@
 const std = @import("std");
 
-const Snowflake = @import("../../snowflake.zig").Snowflake;
+const Snowflake = @import("../../snowflake/snowflake.zig").Snowflake;
 const Channel = @import("../channel/channel.zig");
 const User = @import("../user/user.zig");
 const Message = @import("../message/message.zig");

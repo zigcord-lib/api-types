@@ -1,7 +1,7 @@
 const PartialStruct = @import("zigcord-utils").PartialStruct;
 
-const Snowflake = @import("./snowflake.zig").Snowflake;
-const User = @import("./resources/user/user.zig");
+const Snowflake = @import("../snowflake/snowflake.zig").Snowflake;
+const User = @import("../resources/user/user.zig");
 
 const Team = @This();
 

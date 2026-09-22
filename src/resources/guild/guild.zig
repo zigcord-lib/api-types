@@ -1,11 +1,11 @@
 const PartialStruct = @import("zigcord-utils").PartialStruct;
 
-const Snowflake = @import("../../snowflake.zig").Snowflake;
+const Snowflake = @import("../../snowflake/snowflake.zig").Snowflake;
 const Emoji = @import("../emoji/emoji.zig");
 const Sticker = @import("../sticker/sticker.zig");
 const Channel = @import("../channel/channel.zig");
 const User = @import("../user/user.zig");
-const Role = @import("../../role.zig");
+const Role = @import("../../role/role.zig");
 
 const Guild = @This();
 

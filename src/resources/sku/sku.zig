@@ -1,4 +1,4 @@
-const Snowflake = @import("../../snowflake.zig");
+const Snowflake = @import("../../snowflake/snowflake.zig");
 
 const SKU = @This();
 

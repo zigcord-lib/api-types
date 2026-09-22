@@ -1,4 +1,4 @@
-const Snowflake = @import("../../snowflake.zig").Snowflake;
+const Snowflake = @import("../../snowflake/snowflake.zig").Snowflake;
 const Guild = @import("../guild/guild.zig");
 
 const Voice = @This();

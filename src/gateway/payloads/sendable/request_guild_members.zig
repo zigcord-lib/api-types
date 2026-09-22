@@ -1,4 +1,4 @@
-const Snowflake = @import("../../../snowflake.zig").Snowflake;
+const Snowflake = @import("../../../snowflake/snowflake.zig").Snowflake;
 
 guild_id: Snowflake,
 query: ?[]const u8 = null,

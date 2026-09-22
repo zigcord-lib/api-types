@@ -15,3 +15,4 @@
 - [ ] [Implement Data Types](https://docs.discord.com/developers/events/gateway-events#polls)
 - [ ] [Implement Data Types](https://docs.discord.com/developers/events/gateway-events#rate-limits)
 - [x] [Implement Data Types](https://docs.discord.com/developers/topics/permissions)
+- [ ] Use zigcord-snowflake and zigcord-bitfield libraries.

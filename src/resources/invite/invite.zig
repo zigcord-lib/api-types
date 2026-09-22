@@ -5,7 +5,7 @@ const Channel = @import("../channel/channel.zig");
 const User = @import("../user/user.zig");
 const Application = @import("../application/application.zig");
 const GuildScheduledEvent = @import("../guild_scheduled_event/guild_scheduled_event.zig");
-const Role = @import("../../role.zig");
+const Role = @import("../../role/role.zig");
 
 const Invite = @This();
 
