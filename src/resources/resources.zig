@@ -1,6 +1,8 @@
 const std = @import("std");
 
 pub const application = @import("./application/application.zig");
+pub const application_identity_profile = @import("./application_identity_profile/application_identity_profile.zig");
+pub const application_role_connection_metadata = @import("./application_role_connection_metadata/application_role_connection_metadata.zig");
 pub const audit_log = @import("./audit_log/audit_log.zig");
 pub const auto_moderation = @import("./auto_moderation/auto_moderation.zig");
 pub const channel = @import("./channel/channel.zig");

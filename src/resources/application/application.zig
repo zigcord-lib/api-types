@@ -1,9 +1,5 @@
 const Snowflake = @import("../../snowflake.zig").Snowflake;
 
-pub const ApplicationIdentityProfile = @import("./identity_profile.zig");
-pub const ApplicationIdentity = @import("./identity.zig");
-pub const ApplicationRoleConnectionMetadata = @import("./role_connection_metadata.zig");
-
 id: Snowflake,
 name: []const u8,
 icon: ?[]const u8 = null,

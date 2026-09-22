@@ -33,3 +33,9 @@ pub const DynamicField = union {}; // TODO: implement this
 pub const Media = struct {
     url: []const u8,
 };
+
+const ApplicationIdentity = struct {
+    provider_type: []const u8,
+    provider_id: ?[]const u8 = null,
+    provider_issued_user_id: []const u8,
+};
