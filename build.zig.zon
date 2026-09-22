@@ -3,7 +3,12 @@
     .version = "0.0.1",
     .fingerprint = 0x808262f43119a97d,
     .minimum_zig_version = "0.16.0",
-    .dependencies = .{},
+    .dependencies = .{
+        .zigcord_utils = .{
+            .url = "git+https://github.com/zigcord-lib/utils#99d031e2583bddf7792c1916f070fbb33f5134b2",
+            .hash = "zigcord_utils-0.0.1-4ymbGK0QAADssyf69JUSqdeGFOFkGAsqLcA45LpgoIXn",
+        },
+    },
     .paths = .{
         "build.zig",
         "build.zig.zon",
