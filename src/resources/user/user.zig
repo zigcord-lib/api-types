@@ -1,4 +1,4 @@
-const PartialStruct = @import("zigcord-utils").PartialStruct;
+const utils = @import("zigcord-utils");
 
 const Snowflake = @import("../../snowflake/snowflake.zig").Snowflake;
 const Guild = @import("../guild/guild.zig");
@@ -11,20 +11,20 @@ username: []const u8,
 discriminator: []const u8,
 global_name: ?[]const u8 = null,
 avatar: ?[]const u8,
-bot: ?bool = null,
-system: ?bool = null,
-mfa_enabled: ?bool = null,
-banner: ?[]const u8 = null,
-accent_color: ?u32 = null,
-locale: ?[]const u8 = null,
-verified: ?bool = null,
-email: ?[]const u8 = null,
-flags: ?u64 = null,
-premium_type: ?u8 = null,
-public_flags: ?u64 = null,
-avatar_decoration_data: ?AvatarDecorationData = null,
-collectibles: ?Collectible = null,
-primary_guild: ?PrimaryGuild = null,
+bot: utils.Optional(bool) = .missing,
+system: utils.Optional(bool) = .missing,
+mfa_enabled: utils.Optional(bool) = .missing,
+banner: utils.Optional(?[]const u8) = .missing,
+accent_color: utils.Optional(?u32) = .missing,
+locale: utils.Optional([]const u8) = .missing,
+verified: utils.Optional(bool) = .missing,
+email: utils.Optional(?[]const u8) = .missing,
+flags: utils.Optional(u64) = .missing,
+premium_type: utils.Optional(u8) = .missing,
+public_flags: utils.Optional(u64) = .missing,
+avatar_decoration_data: utils.Optional(?AvatarDecorationData) = .missing,
+collectibles: utils.Optional(?Collectible) = .missing,
+primary_guild: utils.Optional(?PrimaryGuild) = .missing,
 
 pub const UserFlag = enum(u32) {
     STAFF = 1 << 0,
@@ -63,7 +63,7 @@ pub const AvatarDecorationData = struct {
 };
 
 pub const Collectible = struct {
-    nameplate: ?Nameplate = null,
+    nameplate: utils.Optional(Nameplate) = .missing,
 };
 
 pub const Nameplate = struct {
@@ -77,8 +77,8 @@ pub const Connection = struct {
     id: []const u8,
     name: []const u8,
     type: []const u8,
-    revoked: ?bool = null,
-    integrations: ?[]const PartialStruct(Guild.Integration) = null, // TODO: review
+    revoked: utils.Optional(bool) = .missing,
+    integrations: utils.Optional([]const utils.PartialStruct(Guild.Integration)) = .missing, // TODO: review
     verified: bool,
     friend_sync: bool,
     show_activity: bool,
