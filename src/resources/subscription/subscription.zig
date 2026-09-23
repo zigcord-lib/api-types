@@ -1,3 +1,5 @@
+const util = @import("zigcord-utils");
+
 const Snowflake = @import("../../snowflake/snowflake.zig").Snowflake;
 
 const Subscription = @This();
@@ -11,7 +13,7 @@ current_period_start: []const u8 = null,
 current_period_end: []const u8 = null,
 status: SubscriptionStatuses,
 canceled_at: ?[]const u8 = null,
-country: ?[]const u8 = null,
+country: util.Optional([]const u8) = .missing,
 
 pub const SubscriptionStatuses = enum(u8) {
     active = 0,
