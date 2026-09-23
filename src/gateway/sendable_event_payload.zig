@@ -7,7 +7,7 @@ const GatewayOpcode = @import("./opcode.zig").GatewayOpcode;
 pub const GatewaySendableEventPayload = union(enum) {
     identify: gateway_resources.IdentifyEventPayload,
     @"resume": gateway_resources.ResumeEventPayload,
-    heartbeat: ?u64,
+    heartbeat: gateway_resources.HeartbeatEventPayload,
     request_guild_members: gateway_resources.RequestGuildMembersEventPayload,
     request_soundboard_sounds: gateway_resources.RequestSoundboardSoundsEventPayload,
     request_channel_info: gateway_resources.RequestChannelInfoEventPayload,

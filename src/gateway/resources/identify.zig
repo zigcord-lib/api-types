@@ -33,6 +33,11 @@ pub fn jsonStringify(self: *const IdentifyEventPayload, jws: *json.Stringify) !v
         try jws.write(large_threshold);
     }
 
+    if (self.shard.get()) |shard| {
+        try jws.objectField("shard");
+        try jws.write(shard);
+    }
+
     try jws.objectField("intents");
     try jws.write(self.intents);
 

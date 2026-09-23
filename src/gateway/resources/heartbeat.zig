@@ -5,7 +5,7 @@ const fmt = std.fmt;
 
 const HeartbeatEventPayload = @This();
 
-seq: u64,
+seq: ?u64,
 
 pub fn jsonParse(_: mem.Allocator, source: *json.Scanner, _: json.ParseOptions) !HeartbeatEventPayload {
     const seq = switch (try source.next()) {
