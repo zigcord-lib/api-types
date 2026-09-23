@@ -1,4 +1,4 @@
-const PartialStruct = @import("zigcord-utils").PartialStruct;
+const utils = @import("zigcord-utils");
 
 const Snowflake = @import("../../snowflake/snowflake.zig").Snowflake;
 const Emoji = @import("../emoji/emoji.zig");
@@ -10,14 +10,14 @@ answers: []const PollAnswer,
 expiry: ?[]const u8 = null,
 allow_multiselect: bool,
 layout_type: LayoutType,
-results: PollResults,
+results: utils.Optional(PollResults) = .missing,
 
 pub const PollCreateRequest = struct {
     question: PollMedia,
     answers: []const PollAnswer,
-    duration: ?u32 = null,
-    allow_multiselect: ?bool = null,
-    layout_type: ?LayoutType = null,
+    duration: utils.Optional(u32) = .missing,
+    allow_multiselect: utils.Optional(bool) = .missing,
+    layout_type: utils.Optional(LayoutType) = .missing,
 };
 
 pub const LayoutType = enum(u8) {
@@ -25,8 +25,8 @@ pub const LayoutType = enum(u8) {
 };
 
 pub const PollMedia = struct {
-    text: ?[]const u8 = null,
-    emoji: ?PartialStruct(Emoji) = null,
+    text: utils.Optional([]const u8) = .missing,
+    emoji: utils.Optional(utils.PartialStruct(Emoji)) = .missing,
 };
 
 pub const PollAnswer = struct {
