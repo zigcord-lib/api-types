@@ -1,19 +1,21 @@
+const utils = @import("zigcord-utils");
+
 const Snowflake = @import("../../snowflake/snowflake.zig");
 const User = @import("../user/user.zig");
 
 const Sticker = @This();
 
 id: Snowflake,
-pack_id: ?Snowflake = null,
+pack_id: utils.Optional(Snowflake) = .missing,
 name: []const u8 = null,
 description: ?[]const u8 = null,
 tags: []const u8,
 type: StickerType,
 format_type: StickerFormatType,
-available: ?bool = null,
-guild_id: ?Snowflake = null,
-user: ?User = null,
-sort_value: ?u32 = null,
+available: utils.Optional(bool) = .missing,
+guild_id: utils.Optional(Snowflake) = .missing,
+user: utils.Optional(User) = .missing,
+sort_value: utils.Optional(u32) = .missing,
 
 pub const StickerType = enum(u8) {
     standard = 1,
@@ -38,7 +40,7 @@ pub const StickerPack = struct {
     stickers: []const Sticker,
     name: []const u8,
     sku_id: Snowflake,
-    cover_sticker_id: ?Snowflake = null,
+    cover_sticker_id: utils.Optional(Snowflake) = .missing,
     description: []const u8,
-    banner_asset_id: ?Snowflake = null,
+    banner_asset_id: utils.Optional(Snowflake) = .missing,
 };
