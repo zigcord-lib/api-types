@@ -1,4 +1,4 @@
-const PartialStruct = @import("zigcord-utils").PartialStruct;
+const utils = @import("zigcord-utils");
 
 const Snowflake = @import("../../snowflake/snowflake.zig").Snowflake;
 const User = @import("../user/user.zig");
@@ -11,35 +11,35 @@ id: Snowflake,
 name: []const u8,
 icon: ?[]const u8 = null,
 description: []const u8,
-rpc_origins: ?[]const []const u8 = null,
+rpc_origins: utils.Optional([]const []const u8) = .missing,
 bot_public: bool,
 bot_require_code_grant: bool,
-bot: ?PartialStruct(User) = null,
-terms_of_service_url: ?[]const u8 = null,
-privacy_policy_url: ?[]const u8 = null,
-owner: ?PartialStruct(User) = null,
+bot: utils.Optional(utils.PartialStruct(User)) = .missing,
+terms_of_service_url: utils.Optional([]const u8) = .missing,
+privacy_policy_url: utils.Optional([]const u8) = .missing,
+owner: utils.Optional(utils.PartialStruct(User)) = .missing,
 verify_key: []const u8,
 team: ?Team = null,
-guild_id: ?Snowflake = null,
-guild: ?PartialStruct(Guild) = null,
-primary_sku_id: ?Snowflake = null,
-slug: ?[]const u8 = null,
-cover_image: ?[]const u8 = null,
-flags: ?u64 = null, // TODO: create flag enum
-flags_new: ?[]const u8, // TODO: create flag enum
-approximate_guild_count: ?u32 = null,
-approximate_user_install_count: ?u32 = null,
-approximate_user_authorization_count: ?u32 = null,
-redirect_uris: ?[]const []const u8 = null,
-interactions_endpoint_url: ?[]const u8 = null,
-role_connections_verification_url: ?[]const u8 = null,
-event_webhooks_url: ?[]const u8 = null,
-event_webhooks_status: ?ApplicationEventWebhookStatus = null,
-event_webhooks_types: ?[]const []const u8 = null,
-tags: ?[]const []const u8 = null,
-install_params: ?InstallParams = null,
+guild_id: utils.Optional(Snowflake) = .missing,
+guild: utils.Optional(utils.PartialStruct(Guild)) = .missing,
+primary_sku_id: utils.Optional(Snowflake) = .missing,
+slug: utils.Optional([]const u8) = .missing,
+cover_image: utils.Optional([]const u8) = .missing,
+flags: utils.Optional(u64) = .missing, // TODO: create flag enum
+flags_new: utils.Optional([]const u8), // TODO: create flag enum
+approximate_guild_count: utils.Optional(u32) = .missing,
+approximate_user_install_count: utils.Optional(u32) = .missing,
+approximate_user_authorization_count: utils.Optional(u32) = .missing,
+redirect_uris: utils.Optional([]const []const u8) = .missing,
+interactions_endpoint_url: utils.Optional(?[]const u8) = .missing,
+role_connections_verification_url: utils.Optional(?[]const u8) = .missing,
+event_webhooks_url: utils.Optional(?[]const u8) = .missing,
+event_webhooks_status: utils.Optional(ApplicationEventWebhookStatus) = .missing,
+event_webhooks_types: utils.Optional([]const []const u8) = .missing,
+tags: utils.Optional([]const []const u8) = .missing,
+install_params: utils.Optional(InstallParams) = .missing,
 // integration_types_config: TODO: support this
-custom_install_url: ?[]const u8 = null,
+custom_install_url: utils.Optional([]const u8) = .missing,
 
 pub const ApplicationIntegrationType = enum(u8) {
     guild_install = 0,
@@ -47,7 +47,7 @@ pub const ApplicationIntegrationType = enum(u8) {
 };
 
 pub const ApplicationIntegrationTypeConfiguration = struct {
-    oauth2_install_params: ?InstallParams = null,
+    oauth2_install_params: utils.Optional(InstallParams) = .missing,
 };
 
 pub const ApplicationEventWebhookStatus = enum(u8) {
@@ -86,7 +86,7 @@ pub const ActivityLocation = struct {
     id: []const u8,
     kind: ActivityLocationKind,
     channel_id: Snowflake,
-    guild_id: ?Snowflake = null,
+    guild_id: utils.Optional(?Snowflake) = .missing,
 };
 
 pub const ActivityLocationKind = enum {
