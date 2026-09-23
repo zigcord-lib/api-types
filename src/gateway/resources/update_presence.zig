@@ -1,3 +1,1 @@
-comptime {
-    @compileLog("TODO: implement");
-}
+const UpdatePresenceEventPayload = @This();

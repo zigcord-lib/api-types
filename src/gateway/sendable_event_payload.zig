@@ -5,12 +5,12 @@ const gateway_resources = @import("./resources/resources.zig");
 const GatewayOpcode = @import("./opcode.zig").GatewayOpcode;
 
 pub const GatewaySendableEventPayload = union(enum) {
-    identify: gateway_resources.GatewayIdentifyEventPayload,
-    @"resume": gateway_resources.GatewayResumeEventPayload,
+    identify: gateway_resources.IdentifyEventPayload,
+    @"resume": gateway_resources.ResumeEventPayload,
     heartbeat: ?u64,
-    request_guild_members: gateway_resources.GatewayRequestGuildMembersEventPayload,
-    request_soundboard_sounds: gateway_resources.GatewayRequestSoundboardSoundsEventPayload,
-    request_channel_info: gateway_resources.GatewayRequestChannelInfoEventPayload,
+    request_guild_members: gateway_resources.RequestGuildMembersEventPayload,
+    request_soundboard_sounds: gateway_resources.RequestSoundboardSoundsEventPayload,
+    request_channel_info: gateway_resources.RequestChannelInfoEventPayload,
 
     pub inline fn toGatewayOpcode(self: GatewaySendableEventPayload) GatewayOpcode {
         return switch (self) {

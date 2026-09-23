@@ -1,4 +1,0 @@
-comptime {
-    @compileLog("TODO: implement");
-}
-
