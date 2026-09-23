@@ -1,3 +1,5 @@
+const utils = @import("zigcord-utils");
+
 const Snowflake = @import("../../snowflake/snowflake.zig").Snowflake;
 const User = @import("../user/user.zig");
 const Guild = @import("../guild/guild.zig");
@@ -7,9 +9,9 @@ const GuildScheduledEvent = @This();
 id: Snowflake,
 guild_id: Snowflake,
 channel_id: ?Snowflake = null,
-creator_id: ?Snowflake = null,
+creator_id: utils.Optional(?Snowflake) = .missing,
 name: []const u8,
-description: ?[]const u8 = null,
+description: utils.Optional(?[]const u8) = .missing,
 scheduled_start_time: []const u8,
 scheduled_end_time: ?[]const u8 = null,
 privacy_level: GuildScheduledEventPrivacyLevel,
@@ -17,9 +19,9 @@ status: GuildScheduledEventStatus,
 entity_type: GuildScheduledEventEntityType,
 entity_id: ?Snowflake = null,
 entity_metadata: ?GuildScheduledEventEntityMetadata = null,
-creator: ?User = null,
-user_count: ?u32 = null,
-image: ?[]const u8 = null,
+creator: utils.Optional(User) = .missing,
+user_count: utils.Optional(u32) = .missing,
+image: utils.Optional(?[]const u8) = .missing,
 recurrence_rule: ?GuildScheduledEventRecurrenceRule = null,
 
 pub const GuildScheduledEventPrivacyLevel = enum(u8) {
@@ -40,13 +42,13 @@ pub const GuildScheduledEventStatus = enum(u8) {
 };
 
 pub const GuildScheduledEventEntityMetadata = struct {
-    location: ?[]const u8 = null,
+    location: utils.Optional([]const u8) = .missing,
 };
 
 pub const GuildScheduledEventUser = struct {
     guild_scheduled_event_id: Snowflake,
     user: User,
-    member: ?Guild.GuildMember = null,
+    member: utils.Optional(Guild.GuildMember) = .missing,
 };
 
 pub const GuildScheduledEventRecurrenceRule = struct {
