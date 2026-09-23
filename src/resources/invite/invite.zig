@@ -1,4 +1,4 @@
-const PartialStruct = @import("zigcord-utils").PartialStruct;
+const utils = @import("zigcord-utils");
 
 const Guild = @import("../guild/guild.zig");
 const Channel = @import("../channel/channel.zig");
@@ -11,18 +11,18 @@ const Invite = @This();
 
 type: u8,
 code: []const u8,
-guild: ?PartialStruct(Guild) = null,
-channel: ?PartialStruct(Channel) = null,
-inviter: ?User = null,
-target_type: ?u8 = null,
-target_user: ?User = null,
-target_application: ?PartialStruct(Application) = null,
-approximate_presence_count: ?u32 = null,
-approximate_member_count: ?u32 = null,
+guild: utils.Optional(utils.PartialStruct(Guild)) = .missing,
+channel: ?utils.PartialStruct(Channel) = null,
+inviter: utils.Optional(User) = .missing,
+target_type: utils.Optional(u8) = .missing,
+target_user: utils.Optional(User) = .missing,
+target_application: utils.Optional(utils.PartialStruct(Application)) = .missing,
+approximate_presence_count: utils.Optional(u32) = .missing,
+approximate_member_count: utils.Optional(u32) = .missing,
 expires_at: ?[]const u8 = null,
-guild_scheduled_event: ?GuildScheduledEvent = null,
-flags: ?u8 = null,
-roles: ?PartialStruct(Role) = null,
+guild_scheduled_event: utils.Optional(GuildScheduledEvent) = .missing,
+flags: utils.Optional(u8) = .missing,
+roles: utils.Optional([]const utils.PartialStruct(Role)) = .missing,
 
 pub const InviteType = enum(u8) {
     guild = 0,
@@ -48,7 +48,7 @@ pub const InviteMetadata = struct {
 };
 
 pub const InviteStageInstance = struct {
-    members: []const PartialStruct(Guild.GuildMember),
+    members: []const utils.PartialStruct(Guild.GuildMember),
     participant_count: u32,
     speaker_count: u32,
     topic: []const u8,
