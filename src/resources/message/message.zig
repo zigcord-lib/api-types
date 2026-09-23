@@ -1,4 +1,4 @@
-const PartialStruct = @import("zigcord-utils").PartialStruct;
+const utils = @import("zigcord-utils");
 
 const Snowflake = @import("../../snowflake/snowflake.zig").Snowflake;
 const User = @import("../user/user.zig");
@@ -20,33 +20,33 @@ tts: bool,
 mention_everyone: bool,
 mentions: []const User,
 mention_roles: []const Snowflake,
-mention_channels: ?[]const ChannelMention = null,
+mention_channels: utils.Optional([]const ChannelMention) = .missing,
 attachments: []const Attachment,
 embeds: []const Embed,
-reactions: []const Reaction,
+reactions: utils.Optional([]const Reaction) = .missing,
 // nonce: TODO: support this
 pinned: bool,
-webhook_id: ?Snowflake = null,
+webhook_id: utils.Optional(Snowflake) = .missing,
 type: MessageType,
-activity: ?MessageActivity = null,
-application: ?PartialStruct(Application) = null,
-application_id: ?Snowflake = null,
-flags: ?u64 = null,
-message_reference: ?MessageReference = null,
-message_snapshots: ?MessageSnapshot = null,
-referenced_message: ?Message = null,
+activity: utils.Optional(MessageActivity) = .missing,
+application: utils.Optional(utils.PartialStruct(Application)) = .missing,
+application_id: utils.Optional(Snowflake) = .missing,
+flags: utils.Optional(u64) = .missing,
+message_reference: utils.Optional(MessageReference) = .missing,
+message_snapshots: utils.Optional([]const MessageSnapshot) = .missing,
+referenced_message: utils.Optional(?Message) = .missing,
 // interaction_metadata: TODO: support this
 // interaction: TODO: support this
-thread: ?Channel = null,
+thread: utils.Optional(Channel) = .missing,
 // components: TODO: support this
-sticker_items: ?[]const Sticker.StickerItem = null,
-stickers: ?[]const Sticker = null,
-position: ?u32 = null,
-role_subscription_data: ?RoleSubscriptionData = null,
+sticker_items: utils.Optional([]const Sticker.StickerItem) = .missing,
+stickers: utils.Optional([]const Sticker) = .missing,
+position: utils.Optional(u32) = .missing,
+role_subscription_data: utils.Optional(RoleSubscriptionData) = .missing,
 // resolved: TODO: support this
-poll: ?Poll = null,
-call: ?MessageCall = null,
-shared_client_theme: ?SharedClientTheme = null,
+poll: utils.Optional(Poll) = .missing,
+call: utils.Optional(MessageCall) = .missing,
+shared_client_theme: utils.Optional(SharedClientTheme) = .missing,
 
 pub const MessageType = enum(u8) {
     default = 0,
@@ -90,7 +90,7 @@ pub const MessageType = enum(u8) {
 
 pub const MessageActivity = struct {
     type: MessageActivity,
-    party_id: ?[]const u8 = null,
+    party_id: utils.Optional([]const u8) = .missing,
 };
 
 pub const MessageActivityType = enum(u8) {
@@ -122,9 +122,9 @@ pub const ApplicationCommandInteractionMetadata = struct {
     // type: TODO: support this
     user: User,
     // authorizing_integration_owners: TODO: support this
-    original_response_message_id: ?Snowflake = null,
-    target_user: ?User = null,
-    target_message_id: ?Snowflake = null,
+    original_response_message_id: utils.Optional(Snowflake) = .missing,
+    target_user: utils.Optional(User) = .missing,
+    target_message_id: utils.Optional(Snowflake) = .missing,
 };
 
 pub const MessageComponentInteractionMetadata = struct {
@@ -132,7 +132,7 @@ pub const MessageComponentInteractionMetadata = struct {
     // type: TODO: support this
     user: User,
     // authorizing_integration_owners: TODO: support this
-    original_response_message_id: ?Snowflake = null,
+    original_response_message_id: utils.Optional(Snowflake) = .missing,
     interacted_message_id: Snowflake,
 };
 
@@ -141,21 +141,21 @@ pub const ModalSubmitInteractionMetadata = struct {
     // type: TODO: support this
     user: User,
     // authorizing_integration_owners: TODO: support this
-    original_response_message_id: ?Snowflake = null,
+    original_response_message_id: utils.Optional(Snowflake) = .missing,
     // triggering_interaction_metadata: TODO: support this
 };
 
 pub const MessageCall = struct {
     participants: []const Snowflake,
-    ended_timestamp: ?[]const u8 = null,
+    ended_timestamp: utils.Optional(?[]const u8) = .missing,
 };
 
 pub const MessageReference = struct {
-    type: ?MessageReferenceType = null,
-    message_id: ?Snowflake = null,
-    channel_id: ?Snowflake = null,
-    guild_id: ?Snowflake = null,
-    fail_if_not_exists: ?bool = null,
+    type: utils.Optional(MessageReferenceType) = .missing,
+    message_id: utils.Optional(Snowflake) = .missing,
+    channel_id: utils.Optional(Snowflake) = .missing,
+    guild_id: utils.Optional(Snowflake) = .missing,
+    fail_if_not_exists: utils.Optional(bool) = .missing,
 };
 
 pub const MessageReferenceType = enum(u8) {
@@ -164,7 +164,7 @@ pub const MessageReferenceType = enum(u8) {
 };
 
 pub const MessageSnapshot = struct {
-    message: PartialStruct(Message),
+    message: utils.PartialStruct(Message),
 };
 
 pub const Reaction = struct {
@@ -172,7 +172,7 @@ pub const Reaction = struct {
     count_details: ReactionCountDetails,
     me: bool,
     me_burst: bool,
-    emoji: PartialStruct(Emoji),
+    emoji: utils.PartialStruct(Emoji),
     // burst_colors: TODO: support this
 };
 
@@ -182,20 +182,20 @@ pub const ReactionCountDetails = struct {
 };
 
 pub const Embed = struct {
-    title: ?[]const u8 = null,
-    type: ?EmbedType = null,
-    description: ?[]const u8 = null,
-    url: ?[]const u8 = null,
-    timestamp: ?[]const u8 = null,
-    color: ?u32 = null,
-    footer: ?EmbedFooter = null,
-    image: ?EmbedImage = null,
-    thumbnail: ?EmbedImage = null,
-    video: ?EmbedVideo = null,
-    provider: ?EmbedProvider = null,
-    author: ?EmbedAuthor = null,
-    fields: ?[]const EmbedField = null,
-    flags: ?u64 = null,
+    title: utils.Optional([]const u8) = .missing,
+    type: utils.Optional(EmbedType) = .missing,
+    description: utils.Optional([]const u8) = .missing,
+    url: utils.Optional([]const u8) = .missing,
+    timestamp: utils.Optional([]const u8) = .missing,
+    color: utils.Optional(u32) = .missing,
+    footer: utils.Optional(EmbedFooter) = .missing,
+    image: utils.Optional(EmbedImage) = .missing,
+    thumbnail: utils.Optional(EmbedImage) = .missing,
+    video: utils.Optional(EmbedVideo) = .missing,
+    provider: utils.Optional(EmbedProvider) = .missing,
+    author: utils.Optional(EmbedAuthor) = .missing,
+    fields: utils.Optional([]const EmbedField) = .missing,
+    flags: utils.Optional(u64) = .missing,
 };
 
 pub const EmbedType = enum {
@@ -213,27 +213,27 @@ pub const EmbedFlag = enum(u8) {
 };
 
 pub const EmbedVideo = struct {
-    url: ?[]const u8 = null,
-    proxy_url: ?[]const u8 = null,
-    height: ?u32 = null,
-    width: ?u32 = null,
-    content_type: ?[]const u8 = null,
-    placeholder: ?[]const u8 = null,
-    placeholder_version: ?u32 = null,
-    description: ?[]const u8 = null,
-    flags: ?u64 = null,
+    url: utils.Optional([]const u8) = .missing,
+    proxy_url: utils.Optional([]const u8) = .missing,
+    height: utils.Optional(u32) = .missing,
+    width: utils.Optional(u32) = .missing,
+    content_type: utils.Optional([]const u8) = .missing,
+    placeholder: utils.Optional([]const u8) = .missing,
+    placeholder_version: utils.Optional(u32) = .missing,
+    description: utils.Optional([]const u8) = .missing,
+    flags: utils.Optional(u64) = .missing,
 };
 
 pub const EmbedImage = struct {
     url: []const u8,
-    proxy_url: ?[]const u8 = null,
-    height: ?u32 = null,
-    width: ?u32 = null,
-    content_type: ?[]const u8 = null,
-    placeholder: ?[]const u8 = null,
-    placeholder_version: ?u32 = null,
-    description: ?[]const u8 = null,
-    flags: ?u64 = null,
+    proxy_url: utils.Optional([]const u8) = .missing,
+    height: utils.Optional(u32) = .missing,
+    width: utils.Optional(u32) = .missing,
+    content_type: utils.Optional([]const u8) = .missing,
+    placeholder: utils.Optional([]const u8) = .missing,
+    placeholder_version: utils.Optional(u32) = .missing,
+    description: utils.Optional([]const u8) = .missing,
+    flags: utils.Optional(u64) = .missing,
 };
 
 pub const EmbedMediaFlag = enum(u8) {
@@ -241,58 +241,58 @@ pub const EmbedMediaFlag = enum(u8) {
 };
 
 pub const EmbedProvider = struct {
-    name: ?[]const u8 = null,
-    url: ?[]const u8 = null,
+    name: utils.Optional([]const u8) = .missing,
+    url: utils.Optional([]const u8) = .missing,
 };
 
 pub const EmbedAuthor = struct {
     name: []const u8,
-    url: ?[]const u8 = null,
-    icon_url: ?[]const u8 = null,
-    proxy_icon_url: ?[]const u8 = null,
+    url: utils.Optional([]const u8) = .missing,
+    icon_url: utils.Optional([]const u8) = .missing,
+    proxy_icon_url: utils.Optional([]const u8) = .missing,
 };
 
 pub const EmbedFooter = struct {
     text: []const u8,
-    icon_url: ?[]const u8 = null,
-    proxy_icon_url: ?[]const u8 = null,
+    icon_url: utils.Optional([]const u8) = .missing,
+    proxy_icon_url: utils.Optional([]const u8) = .missing,
 };
 
 pub const EmbedField = struct {
     name: []const u8,
     value: []const u8,
-    @"inline": ?bool = null,
+    @"inline": utils.Optional(bool) = .missing,
 };
 
 pub const Attachment = struct {
     id: Snowflake,
     filename: []const u8,
-    title: ?[]const u8 = null,
-    description: ?[]const u8 = null,
-    content_type: ?[]const u8 = null,
+    title: utils.Optional([]const u8) = .missing,
+    description: utils.Optional([]const u8) = .missing,
+    content_type: utils.Optional([]const u8) = .missing,
     size: usize,
     proxy_url: []const u8,
-    height: ?u32 = null,
-    width: ?u32 = null,
-    placeholder: ?[]const u8 = null,
-    placeholder_version: ?u32 = null,
-    ephemeral: ?bool = null,
-    duration_secs: ?f64 = null,
-    waveform: ?[]const u8 = null,
-    flags: ?u64 = null,
-    clip_participants: ?[]const User = null,
-    clip_created_at: ?[]const u8 = null,
-    application: ?Application = null,
+    height: utils.Optional(?u32) = .missing,
+    width: utils.Optional(?u32) = .missing,
+    placeholder: utils.Optional([]const u8) = .missing,
+    placeholder_version: utils.Optional(u32) = .missing,
+    ephemeral: utils.Optional(bool) = .missing,
+    duration_secs: utils.Optional(f64) = .missing,
+    waveform: utils.Optional([]const u8) = .missing,
+    flags: utils.Optional(u64) = .missing,
+    clip_participants: utils.Optional([]const User) = .missing,
+    clip_created_at: utils.Optional([]const u8) = .missing,
+    application: utils.Optional(?Application) = .missing,
 };
 
 pub const AttachmentRequest = struct {
     // id: TODO: support this
-    filename: ?[]const u8 = null,
-    title: ?[]const u8 = null,
-    description: ?[]const u8 = null,
-    duration_secs: ?f64 = null,
-    waveform: ?[]const u8 = null,
-    is_spoiler: ?bool = null,
+    filename: utils.Optional([]const u8) = .missing,
+    title: utils.Optional([]const u8) = .missing,
+    description: utils.Optional([]const u8) = .missing,
+    duration_secs: utils.Optional(f64) = .missing,
+    waveform: utils.Optional([]const u8) = .missing,
+    is_spoiler: utils.Optional(bool) = .missing,
 };
 
 pub const AttachmentFlag = enum(u8) {
@@ -311,10 +311,10 @@ pub const ChannelMention = struct {
 };
 
 pub const AllowedMentions = struct {
-    parse: ?[]const AllowedMentionType = null,
-    roles: ?[]const Snowflake = null,
-    users: ?[]const Snowflake = null,
-    replied_user: ?bool = null,
+    parse: utils.Optional([]const AllowedMentionType) = .missing,
+    roles: utils.Optional([]const Snowflake) = .missing,
+    users: utils.Optional([]const Snowflake) = .missing,
+    replied_user: utils.Optional(bool) = .missing,
 };
 
 pub const AllowedMentionType = enum { // TODO: implement json serialization and deserialization
@@ -339,7 +339,7 @@ pub const SharedClientTheme = struct {
     colors: []const []const u8,
     gradient_angle: u32,
     base_mix: u32,
-    base_theme: ?BaseThemeType = null,
+    base_theme: utils.Optional(?BaseThemeType) = .missing,
 };
 
 pub const BaseThemeType = enum(u8) {
