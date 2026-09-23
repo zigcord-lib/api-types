@@ -1,6 +1,6 @@
 const std = @import("std");
 
-pub const payloads = @import("./payloads/payloads.zig");
+pub const resources = @import("./resources/resources.zig");
 
 pub const GatewayOpcode = @import("./opcode.zig").GatewayOpcode;
 pub const GatewaySendableEvent = @import("./sendable_event.zig");
