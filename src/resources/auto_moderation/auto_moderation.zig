@@ -1,3 +1,5 @@
+const utils = @import("zigcord-utils");
+
 const Snowflake = @import("../../snowflake/snowflake.zig").Snowflake;
 
 const AutoModeration = @This();
@@ -44,7 +46,7 @@ pub const EventType = enum(u8) {
 
 pub const AutoModerationAction = struct {
     type: ActionType,
-    metadata: ?ActionMetadata = null,
+    metadata: utils.Optional(ActionMetadata) = .missing,
 };
 
 pub const ActionType = enum(u8) {
@@ -57,5 +59,5 @@ pub const ActionType = enum(u8) {
 pub const ActionMetadata = struct {
     channel_id: Snowflake,
     duration_seconds: u32,
-    custom_message: ?[]const u8 = null,
+    custom_message: utils.Optional(?[]const u8) = .missing,
 };
