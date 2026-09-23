@@ -1,3 +1,5 @@
+const utils = @import("zigcord-utils");
+
 const Snowflake = @import("../../snowflake/snowflake.zig").Snowflake;
 
 const Entitlement = @This();
@@ -5,13 +7,13 @@ const Entitlement = @This();
 id: Snowflake,
 sku_id: Snowflake,
 application_id: Snowflake,
-user_id: ?Snowflake = null,
+user_id: utils.Optional(Snowflake) = .missing,
 type: EntitlementType,
 deleted: bool,
 starts_at: ?[]const u8 = null,
 ends_at: ?[]const u8 = null,
-guild_id: ?Snowflake = null,
-consumed: ?bool = null,
+guild_id: utils.Optional(Snowflake) = .missing,
+consumed: utils.Optional(bool) = .missing,
 
 pub const EntitlementType = enum(u8) {
     purchase = 1,
