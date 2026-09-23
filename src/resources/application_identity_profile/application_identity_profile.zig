@@ -1,3 +1,5 @@
+const utils = @import("zigcord-utils");
+
 const ApplicationIdentityProfile = @This();
 
 username: ?[]const u8 = null,
@@ -5,29 +7,29 @@ username: ?[]const u8 = null,
 data: ?ProfileData = null,
 
 pub const ProfileData = struct {
-    primary: ?PrimaryProfileData = null,
-    dynamic: ?[]DynamicField = null,
+    primary: utils.Optional(PrimaryProfileData) = .missing,
+    dynamic: utils.Optional([]DynamicField) = .missing,
 };
 
 pub const PrimaryProfileData = struct {
-    season: ?[]const u8 = null,
-    rank_name: ?[]const u8 = null,
-    rank_image: ?Media = null,
-    highest_rank: ?[]const u8 = null,
-    highest_rank_image: ?Media = null,
-    featured_played_character: ?[]const u8 = null,
-    featured_played_character_image: ?Media = null,
-    playtime_hours: ?f64 = null,
-    total_wins: ?u32 = null,
-    current_period_wins: ?u32 = null,
-    total_games: ?u32 = null,
-    current_period_games: ?u32 = null,
-    total_kills: ?u32 = null,
-    current_period_kills: ?u32 = null,
-    total_assists: ?u32 = null,
-    current_period_assists: ?u32 = null,
-    total_deaths: ?u32 = null,
-    current_period_deaths: ?u32 = null,
+    season: utils.Optional([]const u8) = .missing,
+    rank_name: utils.Optional([]const u8) = .missing,
+    rank_image: utils.Optional(Media) = .missing,
+    highest_rank: utils.Optional([]const u8) = .missing,
+    highest_rank_image: utils.Optional(Media) = .missing,
+    featured_played_character: utils.Optional([]const u8) = .missing,
+    featured_played_character_image: utils.Optional(Media) = .missing,
+    playtime_hours: utils.Optional(f64) = .missing,
+    total_wins: utils.Optional(u32) = .missing,
+    current_period_wins: utils.Optional(u32) = .missing,
+    total_games: utils.Optional(u32) = .missing,
+    current_period_games: utils.Optional(u32) = .missing,
+    total_kills: utils.Optional(u32) = .missing,
+    current_period_kills: utils.Optional(u32) = .missing,
+    total_assists: utils.Optional(u32) = .missing,
+    current_period_assists: utils.Optional(u32) = .missing,
+    total_deaths: utils.Optional(u32) = .missing,
+    current_period_deaths: utils.Optional(u32) = .missing,
 };
 
 pub const DynamicField = union {}; // TODO: implement this
@@ -38,6 +40,6 @@ pub const Media = struct {
 
 const ApplicationIdentity = struct {
     provider_type: []const u8,
-    provider_id: ?[]const u8 = null,
+    provider_id: utils.Optional([]const u8) = .missing,
     provider_issued_user_id: []const u8,
 };
